@@ -4,8 +4,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: artilleryio/artillery:latest
-
 steps:
-- script: /home/node/artillery/bin/artillery run tests/performance/socket-io.yml
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js v12.x'
+
+- script: npm install -g artillery@latest
+  displayName: 'Install Artillery'
+
+- script: artillery run tests/performance/socket-io.yml
   displayName: 'Execute load tests'
