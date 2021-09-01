@@ -1,0 +1,11 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+container: artilleryio/artillery:latest
+
+steps:
+- script: /home/node/artillery/bin/artillery run tests/performance/socket-io.yml
+  displayName: 'Execute load tests'
